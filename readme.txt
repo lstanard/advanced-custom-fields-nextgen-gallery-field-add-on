@@ -2,6 +2,7 @@
 Contributors: aloziak, Omicron7, barclay_reg, jayque9
 Donate link: http://www.apollo1.cz/
 Tags: acf, acf add-on, nextgen gallery, custom field, nextgen gallery field
+Version: 2.1
 Requires at least: 3.9
 Tested up to: 4.0.0
 Stable tag: trunk
