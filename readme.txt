@@ -18,7 +18,7 @@ This is an add-on for the [Advanced Custom Fields](http://wordpress.org/extend/p
 The NextGEN Gallery field provides a dropdown (select or multi-select) of NextGEN Gallery names (galleries and albums) and the ability to map the selected NextGEN Gallery to the post.
 The get_value() API returns an array of the selected NextGEN Gallery IDs and the form – album or gallery.
 
-This script works supports both ACF version 3- and  ACF version 4+.
+This script works supports ACF version 3, ACF version 4+ and ACF PRO 5.
 
 <strong>!!! Version 1.1 change get_value() API returned value. You must change your template files. !!!</strong>
 
