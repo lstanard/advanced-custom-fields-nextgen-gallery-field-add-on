@@ -1,5 +1,37 @@
 <?php
 
+class acf_nggallery_field_plugin
+{
+   /**
+   * WordPress Localization Text Domain
+   *
+   * Used in wordpress localization and translation methods.
+   * @var string
+   */
+   const L10N_DOMAIN = 'acf-nggallery-field';
+
+   /*
+   *  Construct
+   *
+   *  @description: 
+   *  @since: 3.6
+   *  @created: 1/04/13
+   */
+   
+   function __construct()
+   {
+      $mofile = trailingslashit(dirname(__File__)) . 'lang/' . self::L10N_DOMAIN . '-' . get_locale() . '.mo';
+      load_textdomain( self::L10N_DOMAIN, $mofile );
+      
+      add_action('acf/register_fields', array($this, 'register_field_v4'));  
+
+   }
+   
+}
+
+error_log("calling Plugin Construct");
+new acf_nggallery_field_plugin();
+
 class ACF_NGGallery_Field extends acf_field
 {
    // vars
@@ -254,7 +286,7 @@ class ACF_NGGallery_Field extends acf_field
    /*
    *  update_value()
    *
-   *  This filter is appied to the $value before it is updated in the db
+   *  This filter is applied to the $value before it is updated in the db
    *
    *  @type filter
    *  @since   3.6
@@ -271,22 +303,20 @@ class ACF_NGGallery_Field extends acf_field
 //    $field = array_merge( $this->defaults, $field );
 //    extract( $field, EXTR_SKIP ); //Declare each item in $field as its own variable i.e.: $name, $value, $label, $time_format, $date_format and $show_week_number
 
+		$values = array();
 
-
-
-        $values = array();
-
-      foreach( $value as $key=>$item ) {
-         $items = explode( ',', $item );
-         foreach( $items as $item ) {
-            if ( is_numeric( $item ) )
-               $values[$key]['ngg_id'] = intval ( $item );
-            else
-               $values[$key]['ngg_form'] = strval( $item );
+		foreach( $value as $key=>$item ) {
+        	$items = explode( ',', $item );
+        	foreach( $items as $item ) {
+        		if ( is_numeric( $item ) )
+        			$values[$key]['ngg_id'] = intval ( $item );
+        		else
+        			$values[$key]['ngg_form'] = strval( $item );
             }
       }
 
       return $values;
+	  
    }
 
    
@@ -294,7 +324,7 @@ class ACF_NGGallery_Field extends acf_field
    /*
    *  format_value_for_api()
    *
-   *  This filter is appied to the $value after it is loaded from the db and before it is passed back to the api functions such as the_field
+   *  This filter is applied to the $value after it is loaded from the db and before it is passed back to the api functions such as the_field
    *
    *  @type filter
    *  @since   3.6

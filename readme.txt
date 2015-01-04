@@ -2,9 +2,8 @@
 Contributors: aloziak, Omicron7, barclay_reg, jayque9
 Donate link: http://www.apollo1.cz/
 Tags: acf, acf add-on, nextgen gallery, custom field, nextgen gallery field
-Version: 2.1
-Requires at least: 3.9
-Tested up to: 4.0.0
+Requires at least: 3.0 or higher
+Tested up to: 4.1.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,9 +17,10 @@ This is an add-on for the [Advanced Custom Fields](http://wordpress.org/extend/p
 The NextGEN Gallery field provides a dropdown (select or multi-select) of NextGEN Gallery names (galleries and albums) and the ability to map the selected NextGEN Gallery to the post.
 The get_value() API returns an array of the selected NextGEN Gallery IDs and the form – album or gallery.
 
-This script works supports ACF version 3, ACF version 4+ and ACF PRO 5.
+The script works supports ACF5 Pro, ACF4, ACF3.
 
-<strong>!!! Version 1.1 change get_value() API returned value. You must change your template files. !!!</strong>
+<strong>!!! Version 1.1 !!! </strong>
+This version changes get_value() API returned value. You must change your template files. !!!
 
 The get_value() API returns a following array:
 `Array (
@@ -89,9 +89,10 @@ activated. This is not a standalone plugin for WordPress, it only adds additiona
 
 = 2.1 =
 * ACF PRO v5 support
+* NextCellent Gallery - NextGEN Legacy support
 
 = 2.0 =
-* Compatiblity to ACF v4 and backward compatibilty to ACV v3
+* Compatiblity to ACF4 and backward compatibilty to ACF3
 * Added option to restict selectable galleries (Albums, Galleries or both)
 
 = 1.2.1 =
