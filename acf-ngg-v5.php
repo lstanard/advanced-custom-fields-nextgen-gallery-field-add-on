@@ -25,7 +25,7 @@ class acf_field_ngg extends acf_field {
 
 		$this->defaults = array(
 			'input_type'		=> 'select',
-			'allow_null'		=> 0,
+			'allow_null'		=> 1,
 			//'input_size'      => 5,
 			'multiple'			=> 'select',
 			'multiple_size'     => 5,
@@ -260,10 +260,7 @@ class acf_field_ngg extends acf_field {
 		$albumlist = $this->ngg_get_albums();
 		$albumlist = $albumlist[0];
 
-
-		$field['placeholder']	= __("Select",'acf');
-
-
+		$field['placeholder']	= __("- Select Gallery -",'acf');
 
 		// atts
 		$atts = array(
@@ -311,7 +308,7 @@ class acf_field_ngg extends acf_field {
 		// choices
 
 		foreach( $galleries as $k => $v ) {
-			if( is_array($v) ){
+			if ( is_array($v) ) {
 
 					// optgroup
 					$els[] = array( 'type' => 'optgroup', 'label' => $v->title );
@@ -329,19 +326,33 @@ class acf_field_ngg extends acf_field {
 
 					$els[] = array( 'type' => '/optgroup' );
 
+			} else {
+
+				if ( $field['value'] ) {
+
+					$els[] = array(
+						'type' => 'option',
+						'value' => $v->gid,
+						'label' => $v->title,
+						'selected' => in_array($v->gid, $field['value'])
+					);
+
 				} else {
 
 					$els[] = array(
 						'type' => 'option',
 						'value' => $v->gid,
 						'label' => $v->title,
-						'selected' => $field['value'] ? in_array( $v->gid, $field['value'] ) : ''
+						'selected' => ''
 					);
 
-					$choices[$v->gid] = $v->title;
-
 				}
+
+				$choices[$v->gid] = $v->title;
+
+			}
 		}
+
 
 		// hidden input
 		if( $field['ui'] ) {
@@ -371,9 +382,9 @@ class acf_field_ngg extends acf_field {
 
 		?>
 
-			<option value="0">No gallery</option>
-
             <?php if ( $field['nextgen_type'] == "Galleries and Albums" || $field['nextgen_type'] == "Galleries" ) : ?>
+
+            <option value="" selected><?php echo $field['placeholder']; ?></option>
 
             <optgroup label="<?php _e('Galleries','nggallery'); ?>">
             	<?php foreach( $galleries as $gallery ) : ?>
@@ -384,7 +395,7 @@ class acf_field_ngg extends acf_field {
 
 			<?php if ( $field['nextgen_type'] == "Galleries and Albums" || $field['nextgen_type'] == "Albums" ) : ?>
 			<optgroup label="<?php _e('Albums','nggallery'); ?>">
-				<?php foreach( $albumlist as $album ) : ?>
+					<?php foreach( $albumlist as $album ) : ?>
 				<option value="<?php echo $album->id.',album'; ?>"<?php if ( $values_album ) selected( in_array( $album->id, $values_album ) ); ?>><?php echo $album->name; ?></option>
 				<?php endforeach; ?>
 			</optgroup>
